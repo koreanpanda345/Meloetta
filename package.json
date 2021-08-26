@@ -1,0 +1,39 @@
+{
+  "name": "meloetta",
+  "version": "1.0.0",
+  "description": "A npm package used to connect, and interact with pokemon showdown.",
+  "main": "lib/index.js",
+  "scripts": {
+	"build": "tsc",
+	"format": "prettier --write \"src/**/*.ts\"",
+	"lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json",
+	"prepare": "npm run build",
+	"prepublishOnly": "npm test && npm run lint",
+	"preversion": "npm run lint",
+	"version": "npm run format && git add -A src",
+	"postversion": "git push && git push --tags"
+  },
+  "author": "Koreanpanda345",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
+    "@types/ws": "^7.4.7",
+    "dotenv": "^10.0.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.5",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "querystring": "^0.2.1",
+    "ws": "^8.2.0"
+  },
+  "files": ["/lib/**/*"]
+}
