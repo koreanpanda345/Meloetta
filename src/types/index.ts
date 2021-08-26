@@ -1,1 +1,1 @@
-export * from "./MeloettaSettings";
+export * from './MeloettaSettings';

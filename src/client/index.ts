@@ -1,1 +1,1 @@
-export * from "./MeloettaClient";
+export * from './MeloettaClient';
