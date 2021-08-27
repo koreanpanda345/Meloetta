@@ -3,7 +3,6 @@ import { MeloettaSettings } from '../types';
 import { MeloettaClientUser } from './MeloettaClientUser';
 import { WebSocketManager } from './ws/WebSocketManager';
 import { Message } from './models/Message';
-import { Battle } from './models/Battle';
 
 export interface ShowdownEvents {
   ready: () => void;
@@ -23,15 +22,31 @@ export interface MeloettaClient {
   ws: WebSocketManager;
   user: MeloettaClientUser;
 }
-
+/**
+ * This is the main class of the package.
+ * This is what will be called when developer uses this package.
+ */
 export class MeloettaClient extends EventEmitter {
+  /**
+   *
+   * @param settings settings for the client. This is required.
+   */
   constructor(settings: MeloettaSettings) {
     super();
     this.ws = new WebSocketManager(this, settings);
   }
 
-  public async joinBattle(battleId: string) {}
+  public async disconnect() {
+	  try {
+		  await this.ws.disconnect();
+	  } catch(error) {
+		  throw error;
+	  }
+  }
 
+  /**
+   * Connects the client the showdown server.
+   */
   public async connect() {
     try {
       await this.ws.connect();

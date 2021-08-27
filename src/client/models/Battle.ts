@@ -1,5 +1,8 @@
 import EventEmitter = require('events');
 
+/**
+ * This is to make it easier to pass the pokemon's data.
+ */
 type PokemonId = {
   player: 'p1' | 'p2' | 'p3' | 'p4';
   position?: 'a' | 'b';

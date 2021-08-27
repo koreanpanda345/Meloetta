@@ -1,5 +1,4 @@
 import { MeloettaClient } from '../MeloettaClient';
-import { WebSocketManager } from '../ws/WebSocketManager';
 
 export class Message {
   constructor(private _data: MessageData) {}
