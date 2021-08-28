@@ -12,15 +12,15 @@ import { Battle } from '../models/Battle';
  */
 export class WebSocketManager {
   private _ws: ws;
-	/**
-	 * 
-	 * @param _client - We need the client to push data to the correct events.
-	 * @param _settings - The settings for the client.
-	 */
+  /**
+   *
+   * @param _client - We need the client to push data to the correct events.
+   * @param _settings - The settings for the client.
+   */
   constructor(private _client: MeloettaClient, private _settings: MeloettaSettings) {
     this._ws = new ws(`ws://${this._settings.ip}:${this._settings.port}/showdown/websocket`);
   }
-  /** 
+  /**
    * Connects the client to the showdown servers.
    */
   public async connect() {
@@ -39,7 +39,7 @@ export class WebSocketManager {
       });
   }
   /**
-   * 
+   *
    * @param nonce - The nonce that we need to login
    * @returns returns a json structure of the client's info.
    */
@@ -70,7 +70,7 @@ export class WebSocketManager {
    * @param data - the data to be sent.
    */
   public async sendCommand(command: string, data: string[]) {
-    let cmd = `|/${command} ${data.join(', ')}`;
+    const cmd = `|/${command} ${data.join(', ')}`;
     this._ws.send(cmd, (error) => {
       if (error) throw error;
     });
@@ -139,7 +139,7 @@ export class WebSocketManager {
 
           await module(this._client, sections);
         } catch (error) {
-          //throw error;
+          // throw error;
         }
 
         break;

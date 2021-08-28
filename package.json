@@ -15,6 +15,10 @@
 	"postversion": "git push && git push --tags"
   },
   "author": "Koreanpanda345",
+  "repository": {
+	  "type": "git",
+	  "url": "git+https://github.com/koreanpanda345/Meloetta.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/axios": "^0.14.0",

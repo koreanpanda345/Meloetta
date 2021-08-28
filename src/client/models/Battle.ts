@@ -205,8 +205,7 @@ export class Battle extends EventEmitter {
         break;
       case 'replace':
         this.emit('replace', this.getDetails(sections[0]), [
-          Number(sections[1].split('/')
-		  [0]),
+          Number(sections[1].split('/')[0]),
           Number(sections[1].split('/')[1]),
         ]);
         break;
@@ -364,15 +363,14 @@ export class Battle extends EventEmitter {
   }
 
   public async leaveBattle(client: MeloettaClient) {
-	client.ws.sendCommand('leave', [this._battleId]);
-	console.log('Left the battle');
+    client.ws.sendCommand('leave', [this._battleId]);
   }
 
   private getDetails(str: string) {
-    //Position: Name
-    let player = str.split(':')[0];
-    let pokemon = str.split(':')[1].trim();
-    let data: PokemonId = {
+    // Position: Name
+    const player = str.split(':')[0];
+    const pokemon = str.split(':')[1].trim();
+    const data: PokemonId = {
       player: (player[0] + player[1]) as 'p1' | 'p2' | 'p3' | 'p4',
       position: player[2] as 'a' | 'b',
       pokemon: pokemon.split(',')[0],

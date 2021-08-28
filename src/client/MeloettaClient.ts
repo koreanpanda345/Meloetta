@@ -37,11 +37,11 @@ export class MeloettaClient extends EventEmitter {
   }
 
   public async disconnect() {
-	  try {
-		  await this.ws.disconnect();
-	  } catch(error) {
-		  throw error;
-	  }
+    try {
+      await this.ws.disconnect();
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**
