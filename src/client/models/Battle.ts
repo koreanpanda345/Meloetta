@@ -1,4 +1,5 @@
 import EventEmitter = require('events');
+import { MeloettaClient } from '../MeloettaClient';
 
 /**
  * This is to make it easier to pass the pokemon's data.
@@ -195,6 +196,22 @@ export class Battle extends EventEmitter {
           sections[1],
         );
         break;
+      case 'detailschange':
+      case '-formechange':
+        this.emit('detailschangeAndFormechange', this.getDetails(sections[0]), [
+          Number(sections[1].split('/')[0]),
+          Number(sections[1].split('/')[1]),
+        ]);
+        break;
+      case 'replace':
+        this.emit('replace', this.getDetails(sections[0]), [
+          Number(sections[1].split('/')
+		  [0]),
+          Number(sections[1].split('/')[1]),
+        ]);
+        break;
+      case 'swap':
+        this.emit('swap', sections[0], Number(sections[1]));
 
       // Minor Actions
       case '-damage':
@@ -205,6 +222,9 @@ export class Battle extends EventEmitter {
         break;
       case '-start':
         this.emit('-start', this.getDetails(sections[0]), sections[1]);
+        break;
+      case '-end':
+        this.emit('-end', this.getDetails(sections[0]), sections[1]);
         break;
       case '-heal':
         this.emit('-heal', this.getDetails(sections[0]), [
@@ -218,11 +238,52 @@ export class Battle extends EventEmitter {
       case '-ability':
         this.emit('-ability', this.getDetails(sections[0]), sections[1], sections[2]);
         break;
+      case '-endability':
+        this.emit('-endability', this.getDetails(sections[0]));
       case '-fail':
         this.emit('-fail', this.getDetails(sections[0]), sections[1]);
         break;
+      case '-block':
+        this.emit('-block', this.getDetails(sections[0]), this.getDetails(sections[3]), sections[1], sections[2]);
+        break;
+      case '-notarget':
+        this.emit('-notarget', this.getDetails(sections[0]));
+        break;
+      case '-miss':
+        this.emit('-miss', sections[0], this.getDetails(sections[1]));
+        break;
+      case '-sethp':
+        this.emit('-sethp', this.getDetails(sections[0]), Number(sections[1]));
+        break;
       case '-boost':
         this.emit('-boost', this.getDetails(sections[0]), sections[1], Number(sections[2]));
+        break;
+      case '-unboost':
+        this.emit('-unboost', this.getDetails(sections[0]), sections[1], Number(sections[2]));
+        break;
+      case '-setboost':
+        this.emit('-setboost', this.getDetails(sections[0]), sections[1], Number(sections[2]));
+        break;
+      case '-swapboost':
+        this.emit('-swapboost', this.getDetails(sections[0]), this.getDetails(sections[1]), sections[2].split(','));
+        break;
+      case '-invertboost':
+        this.emit('-invertboost', this.getDetails(sections[0]));
+        break;
+      case '-clearboost':
+        this.emit('-clearboost', this.getDetails(sections[0]));
+        break;
+      case '-clearallboost':
+        this.emit('-clearallboost');
+        break;
+      case '-clearpositiveboost':
+        this.emit('-clearpositiveboost', this.getDetails(sections[0]), this.getDetails(sections[1]), sections[2]);
+        break;
+      case '-clearnegativeboost':
+        this.emit('-clearnegativeboost', this.getDetails(sections[0]));
+        break;
+      case '-copyboost':
+        this.emit('-copyboost', this.getDetails(sections[0]), this.getDetails(sections[1]));
         break;
       case '-status':
         this.emit('-status', this.getDetails(sections[0]), sections[1]);
@@ -232,6 +293,12 @@ export class Battle extends EventEmitter {
         break;
       case '-sidestart':
         this.emit('-sidestart', sections[0].split(':')[0] as 'p1' | 'p2' | 'p3' | 'p4', sections[1]);
+        break;
+      case '-sideend':
+        this.emit('-sideend', sections[0].split(':')[0] as 'p1' | 'p2' | 'p3' | 'p4', sections[1]);
+        break;
+      case '-item':
+        this.emit('-item', this.getDetails(sections[0]), sections[1]);
         break;
       case '-enditem':
         this.emit('-enditem', this.getDetails(sections[0]), sections[1], sections[2]);
@@ -248,7 +315,57 @@ export class Battle extends EventEmitter {
       case '-fieldend':
         this.emit('-fieldend', sections[0]);
         break;
+      case '-crit':
+        this.emit('-crit', this.getDetails(sections[0]));
+        break;
+      case '-supereffective':
+        this.emit('-supereffective', this.getDetails(sections[0]));
+        break;
+      case '-resisted':
+        this.emit('-resisted', this.getDetails(sections[0]));
+        break;
+      case '-immune':
+        this.emit('-immune', this.getDetails(sections[0]));
+        break;
+      case '-transform':
+        this.emit('-transform', this.getDetails(sections[0]), sections[1]);
+        break;
+      case '-mega':
+        this.emit('-mega', this.getDetails(sections[0]), sections[1]);
+        break;
+      case '-primal':
+        this.emit('-primal', this.getDetails(sections[0]));
+        break;
+      case '-zpower':
+        this.emit('-zpower', this.getDetails(sections[0]));
+        break;
+      case '-zbroken':
+        this.emit('-zbroken', this.getDetails(sections[0]));
+        break;
+      case '-hint':
+        this.emit('-hint', sections[0]);
+        break;
+      case '-center':
+        this.emit('-center');
+        break;
+      case '-message':
+        this.emit('-message', sections[0]);
+        break;
+      case '-combine':
+        this.emit('-combine');
+        break;
+      case '-prepare':
+        this.emit('-prepare', this.getDetails(sections[0]), sections[1], this.getDetails(sections[2]));
+        break;
+      case '-mustrecharge':
+        this.emit('-mustrecharge', this.getDetails(sections[0]));
+        break;
     }
+  }
+
+  public async leaveBattle(client: MeloettaClient) {
+	client.ws.sendCommand('leave', [this._battleId]);
+	console.log('Left the battle');
   }
 
   private getDetails(str: string) {
