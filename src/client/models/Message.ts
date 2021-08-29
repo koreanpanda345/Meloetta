@@ -7,7 +7,7 @@ export class Message {
     return this._data.content;
   }
   public get author() {
-    return this._data.content;
+    return this._data.by;
   }
   public get target() {
     return this._data.to;
