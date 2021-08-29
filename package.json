@@ -1,23 +1,23 @@
 {
   "name": "meloetta",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A npm package used to connect, and interact with pokemon showdown.",
   "main": "lib/index.js",
   "scripts": {
-	"build": "tsc",
-	"format": "prettier --write \"src/**/*.ts\"",
-	"lint": "tslint -p tsconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json --detectOpenHandles",
-	"prepare": "npm run build",
-	"prepublishOnly": "npm test && npm run lint",
-	"preversion": "npm run lint",
-	"version": "npm run format && git add -A src",
-	"postversion": "git push && git push --tags"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "author": "Koreanpanda345",
   "repository": {
-	  "type": "git",
-	  "url": "git+https://github.com/koreanpanda345/Meloetta.git"
+    "type": "git",
+    "url": "git+https://github.com/koreanpanda345/Meloetta.git"
   },
   "license": "MIT",
   "devDependencies": {
@@ -39,5 +39,7 @@
     "querystring": "^0.2.1",
     "ws": "^8.2.0"
   },
-  "files": ["/lib/**/*"]
+  "files": [
+    "/lib/**/*"
+  ]
 }
