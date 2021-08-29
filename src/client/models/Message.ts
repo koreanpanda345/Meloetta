@@ -19,6 +19,10 @@ export class Message {
   public async send(content: string) {
     await this._data.client.ws.sendCommand('msg', [this._data.to, content]);
   }
+
+  public async sendTo(to: string, content: string) {
+    await this._data.client.ws.sendCommand('msg', [to, content]);
+  }
 }
 
 type MessageData = {
