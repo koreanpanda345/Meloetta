@@ -378,6 +378,29 @@ export class Battle extends EventEmitter {
     return data;
   }
 
+  public toLog() {
+    return this._data.join('\n');
+  }
+
+  public toJson() {
+    let json: {
+      [key: string]: {
+        [key: string]: string;
+      }
+    } = {};
+    let turn = 0;
+    for(let line of this._data) {
+      if(line.startsWith('|turn|')) {
+        turn++;
+      } else {
+        json[turn][`${line.split('|')[1]}`] = line.split('|')[2];
+      }
+    }
+
+    console.log(json);
+    return json;
+  }
+
   public get data() {
     return this._data;
   }
