@@ -1,4 +1,4 @@
-import {Battle} from './../client/models/Battle';
+import { Battle } from './../client/models/Battle';
 describe('Testing Battle Feature', () => {
   const battle = new Battle('');
   beforeEach(() => {
@@ -7,18 +7,18 @@ describe('Testing Battle Feature', () => {
 
   test('Player Event', () => {
     battle.addLine('player', ['p1', 'iG koreanpanda', 'anabel', '1000']);
-    
+
     battle.on('player', (player, username, avatar, rating) => {
       expect({
         player,
         username,
         avatar,
-        rating
+        rating,
       }).toEqual({
         player: 'p1',
         username: 'iG koreanpanda',
         avatar: 'anabel',
-        rating: 1000
+        rating: 1000,
       });
     });
   });
@@ -39,7 +39,5 @@ describe('Testing Battle Feature', () => {
     expect(battle.toLog()).toEqual(log);
   });
 
-  test('To Json Method', () => {
-    
-  })
+  test('To Json Method', () => {});
 });

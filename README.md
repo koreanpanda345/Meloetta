@@ -18,6 +18,10 @@ Meloetta is a npm package to connect to Pokemon Showdown and interact with the s
 - [] More documentations added to help developers use this package.
 
 # Change Log
+## 1.0.1
+- Fixed Message.author. Should be return the author now, instead of the contet.
+- add Message.sendTo. This will allow you to send a message to a specific user/room.
+- add Battle.toLog, and Battle.toJson. These are formatting options used to output the full battle log that smogon sent to the client.
 ## 1.0.0
 - Package was released.
 # Installation

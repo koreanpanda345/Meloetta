@@ -383,21 +383,20 @@ export class Battle extends EventEmitter {
   }
 
   public toJson() {
-    let json: {
+    const json: {
       [key: string]: {
         [key: string]: string;
-      }
+      };
     } = {};
     let turn = 0;
-    for(let line of this._data) {
-      if(line.startsWith('|turn|')) {
+    for (const line of this._data) {
+      if (line.startsWith('|turn|')) {
         turn++;
       } else {
         json[turn][`${line.split('|')[1]}`] = line.split('|')[2];
       }
     }
 
-    console.log(json);
     return json;
   }
 
