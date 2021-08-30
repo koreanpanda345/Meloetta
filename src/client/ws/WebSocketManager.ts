@@ -75,6 +75,7 @@ export class WebSocketManager {
       if (error) throw error;
     });
   }
+
   /**
    * Allows the client to join a battle, and get battle events from it.
    * @param battleId - the battle's id that the client wants to join.

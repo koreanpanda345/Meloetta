@@ -13,6 +13,8 @@ export interface ShowdownEvents {
   init: (sections: string[]) => void;
   updateUser: (sections: string[]) => void;
   message: (message: Message) => void;
+  updatechallenges: (sections: string[]) => void;
+  updatesearch: (sections: string[]) => void;
 }
 
 export interface MeloettaClient {
