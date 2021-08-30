@@ -9,6 +9,7 @@ export interface ShowdownEvents {
   connected: () => void;
   disconnected: (code: number, reason: string) => void;
   error: (err: Error) => void;
+  debug: (data: string) => void;
   noinit: (sections: string[]) => void;
   init: (sections: string[]) => void;
   updateUser: (sections: string[]) => void;

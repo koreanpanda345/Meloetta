@@ -28,6 +28,7 @@ export class WebSocketManager {
       .on('open', (_: WebSocket) => {
         this._client.emit('connected');
         this._ws.on('message', async (data) => {
+			this._client.emit('debug', data.toString());
           await this.processCommand(data.toString());
         });
       })
